@@ -45,6 +45,9 @@ function App({
   return (
     <View className="h-screen">
       <NavigationContainer
+        documentTitle={{
+          enabled: false,
+        }}
         initialState={notStaledInitialState}
         linking={linking}
         fallback={<Text>loading...</Text>}>
