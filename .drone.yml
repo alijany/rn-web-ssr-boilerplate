@@ -1,0 +1,31 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: prod
+    image: hub.hamdocker.ir/docker:dind
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+
+    commands:
+      - docker build -t app .
+      - docker stop app-container || true
+      - docker rm app-container  || true
+      - docker run -d -p 8888:8888 -p 24678:24678 --name app-container app
+      - docker system prune -f
+    when:
+      branch:
+        - main
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
+
+trigger:
+  branch:
+    - main
+  event:
+    - push

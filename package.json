@@ -1,5 +1,5 @@
 {
-  "name": "rnWebSsrBoilerplate",
+  "name": "rn-web-ssr-boilerplate",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,12 +8,10 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "web:start": "vite -c ./web/vite.config.spa.ts",
-    "web:build": "rimraf dist && npm run web:build:spa && npm run web:build:ssr && npm run web:build:server",
-    "web:build:server": " tsup ./web/server.ts --tsconfig ./web/tsconfig.json -d ./dist --format esm",
-    "web:build:spa": "vite build --outDir ../dist/client --ssrManifest -c ./web/vite.config.spa.ts",
-    "web:build:ssr": "vite build --ssr web/entry-server.tsx --outDir dist/server -c ./web/vite.config.ssr.ts",
-    "web:serve": "cross-env NODE_ENV=production node dist/server.mjs"
+    "postinstall": "cd web && npm i",
+    "web:build": "npm run build --prefix web",
+    "web:serve": "npm run serve --prefix web",
+    "web:start": "npm run start --prefix web"
   },
   "dependencies": {
     "@gorhom/portal": "^1.0.14",
@@ -25,12 +23,11 @@
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
     "axios": "^1.7.2",
+    "global": "^4.4.0",
     "iconsax-react-native": "^0.0.8",
     "js-cookie": "^3.0.5",
     "nanostores": "^0.10.3",
     "nativewind": "^2.0.11",
-    "react": "18.2.0",
-    "react-dom": "^18.2.0",
     "react-helmet-async": "^2.0.5",
     "react-native": "0.74.2",
     "react-native-blob-util": "^0.19.9",
@@ -39,42 +36,30 @@
     "react-native-mmkv": "^2.12.2",
     "react-native-reanimated": "^3.12.1",
     "schema-dts": "^1.1.2",
+    "snap-query": "^0.7.8",
     "tailwindcss": "^3.3.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "@babel/preset-env": "^7.20.0",
-    "@babel/runtime": "^7.20.0",
     "@react-native/babel-preset": "0.74.84",
     "@react-native/eslint-config": "0.74.84",
     "@react-native/metro-config": "0.74.84",
     "@react-native/typescript-config": "0.74.84",
-    "@rollup/plugin-inject": "^5.0.5",
-    "@types/compression": "^1.7.5",
-    "@types/express": "^4.17.21",
     "@types/js-cookie": "^3.0.6",
-    "@types/jsonwebtoken": "^9.0.6",
     "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
     "@types/react-test-renderer": "^18.0.0",
     "@types/serve-static": "^1.15.7",
-    "@vitejs/plugin-react": "^4.3.1",
     "babel-jest": "^29.6.3",
-    "compression": "^1.7.4",
     "eslint": "^8.19.0",
-    "express": "^4.19.2",
     "jest": "^29.6.3",
-    "jsonwebtoken": "^9.0.2",
     "prettier": "2.8.8",
     "react-native-web": "^0.19.12",
     "react-test-renderer": "18.2.0",
-    "rollup-plugin-preserve-directives": "^0.4.0",
-    "serve-static": "^1.15.0",
-    "typescript": "5.0.4",
-    "vite": "^5.3.2",
-    "vite-plugin-commonjs": "^0.10.1",
-    "vite-plugin-react-native-web": "^1.0.3"
+    "typescript": "5.0.4"
+  },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "engines": {
     "node": ">=18"

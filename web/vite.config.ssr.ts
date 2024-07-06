@@ -1,9 +1,9 @@
+import inject from '@rollup/plugin-inject';
 import react from '@vitejs/plugin-react';
 import preserveDirectives from 'rollup-plugin-preserve-directives';
 import {defineConfig} from 'vite';
 import commonjs from 'vite-plugin-commonjs';
 import reactNativeWeb from 'vite-plugin-react-native-web';
-import inject from '@rollup/plugin-inject';
 
 export default defineConfig({
   css: {
@@ -16,7 +16,11 @@ export default defineConfig({
       input: 'web/entry-server.tsx',
       plugins: [
         inject({
-          include: 'node_modules/@react-navigation/**',
+          include: '../node_modules/@react-navigation/**',
+          window: 'global/window',
+        }),
+        inject({
+          include: '../node_modules/react-native-gesture-handler/**',
           window: 'global/window',
         }),
       ],

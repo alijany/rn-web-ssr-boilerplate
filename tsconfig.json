@@ -5,8 +5,5 @@
       "dom"
     ],
     "module": "ES2020",
-    "types": [
-      "vite/client",
-    ]
   },
 }

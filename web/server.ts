@@ -21,7 +21,8 @@ async function createServer() {
   const app = express();
 
   const vite = await createViteServer({
-    server: {middlewareMode: true},
+    server: {middlewareMode: true, hmr: false},
+    mode: 'production',
     appType: 'custom',
     logLevel: 'info',
     root: 'dist',
